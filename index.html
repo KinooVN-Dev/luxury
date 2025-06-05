@@ -1,174 +1,470 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Team HeoSMP</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Team LuXuRy - HeoSMP</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet" />
+<style>
+  /* Reset */
+  * {
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Orbitron', sans-serif;
+    height: 100vh;
+    background: #000;
+    overflow-x: hidden;
+    color: #0ff;
+    filter: hue-rotate(0deg);
+    animation: colorShift 30s linear infinite;
+    position: relative;
+  }
 
-    body {
-      margin: 0;
-      padding: 0;
-      background: url('https://wallpapercave.com/wp/wp1917154.png') no-repeat center center fixed;
-      background-size: cover;
-      font-family: 'Press Start 2P', cursive;
-      color: #fff;
-    }
+  /* Plasma background cực cháy */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -3;
+    background: radial-gradient(circle at center, #00fff7, #000011 70%);
+    filter: blur(90px);
+    animation: plasmaPulse 15s ease-in-out infinite alternate;
+    mix-blend-mode: screen;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -4;
+    background: linear-gradient(45deg, #ff0080, #00ffff, #ffff00, #ff0080);
+    background-size: 800% 800%;
+    animation: gradientShift 25s linear infinite;
+    filter: blur(120px);
+    mix-blend-mode: screen;
+  }
 
-    .container {
-      padding: 40px;
-      background-color: rgba(0, 0, 0, 0.7);
-      max-width: 1200px;
-      margin: auto;
-      border-radius: 20px;
-    }
+  @keyframes plasmaPulse {
+    0% { filter: blur(80px) brightness(1.2); }
+    50% { filter: blur(100px) brightness(1.4); }
+    100% { filter: blur(80px) brightness(1.2); }
+  }
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  @keyframes colorShift {
+    0% { filter: hue-rotate(0deg); }
+    50% { filter: hue-rotate(180deg); }
+    100% { filter: hue-rotate(360deg); }
+  }
 
-    h1, h2 {
-      text-align: center;
-      text-shadow: 2px 2px #000;
-      margin-bottom: 30px;
+  /* Sparkles bay lung tung */
+  .sparkle {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    border-radius: 50%;
+    filter: drop-shadow(0 0 5px #ff00ff);
+    animation: sparkleMove 6s linear infinite;
+    opacity: 0.8;
+    pointer-events: none;
+  }
+  @keyframes sparkleMove {
+    0% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 1;
     }
+    50% {
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(-600px) translateX(200px) scale(0.5);
+      opacity: 0;
+    }
+  }
 
-    h1 {
-      font-size: 28px;
+  /* Tiêu đề cực đỉnh với glitch & neon glow */
+  header {
+    text-align: center;
+    padding: 120px 20px 40px;
+    user-select: none;
+    position: relative;
+    z-index: 10;
+  }
+  .luxury-title {
+    font-size: 100px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    color: transparent;
+    background: linear-gradient(90deg,
+      #ff00ff,
+      #00ffff,
+      #ffff00,
+      #ff00ff,
+      #00ffff);
+    background-size: 400% 400%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: neonGlitch 3s ease infinite, neonGlow 1.8s ease-in-out infinite alternate;
+    text-shadow:
+      0 0 15px #ff00ff,
+      0 0 30px #00ffff,
+      0 0 45px #ffff00,
+      0 0 60px #ff00ff,
+      0 0 75px #00ffff;
+    position: relative;
+  }
+  /* Glitch effect layers */
+  .luxury-title::before,
+  .luxury-title::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    clip-path: polygon(0 2%, 100% 2%, 100% 15%, 0 15%);
+    animation: glitchTop 2.5s infinite linear alternate-reverse;
+  }
+  .luxury-title::after {
+    clip-path: polygon(0 85%, 100% 85%, 100% 98%, 0 98%);
+    animation: glitchBottom 3s infinite linear alternate-reverse;
+  }
+  @keyframes glitchTop {
+    0% {
+      transform: translate(-2px, -2px);
+      clip-path: polygon(0 2%, 100% 2%, 100% 15%, 0 15%);
+      opacity: 0.8;
     }
+    50% {
+      transform: translate(2px, 2px);
+      clip-path: polygon(0 5%, 100% 5%, 100% 12%, 0 12%);
+      opacity: 0.3;
+    }
+    100% {
+      transform: translate(-2px, -2px);
+      clip-path: polygon(0 2%, 100% 2%, 100% 15%, 0 15%);
+      opacity: 0.8;
+    }
+  }
+  @keyframes glitchBottom {
+    0% {
+      transform: translate(2px, 2px);
+      clip-path: polygon(0 85%, 100% 85%, 100% 98%, 0 98%);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translate(-2px, -2px);
+      clip-path: polygon(0 88%, 100% 88%, 100% 95%, 0 95%);
+      opacity: 0.2;
+    }
+    100% {
+      transform: translate(2px, 2px);
+      clip-path: polygon(0 85%, 100% 85%, 100% 98%, 0 98%);
+      opacity: 0.7;
+    }
+  }
 
-    h2 {
-      font-size: 18px;
-      margin-top: 60px;
+  /* Neon glow animation */
+  @keyframes neonGlitch {
+    0%, 100% {
+      background-position: 0% 50%;
     }
+    50% {
+      background-position: 400% 50%;
+    }
+  }
+  @keyframes neonGlow {
+    0% {
+      text-shadow:
+        0 0 30px #ff00ff,
+        0 0 60px #00ffff,
+        0 0 90px #ffff00,
+        0 0 120px #ff00ff,
+        0 0 150px #00ffff;
+    }
+    100% {
+      text-shadow:
+        0 0 50px #ff00ff,
+        0 0 90px #00ffff,
+        0 0 120px #ffff00,
+        0 0 150px #ff00ff,
+        0 0 180px #00ffff;
+    }
+  }
 
-    .team {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-    }
+  /* Lens flare cực chất */
+  header::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle at center, #ffffff55, #ff00ff00 80%);
+    filter: blur(40px);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    animation: flarePulse 4s ease-in-out infinite alternate;
+    z-index: -1;
+  }
+  @keyframes flarePulse {
+    0% { filter: blur(30px) brightness(1); }
+    50% { filter: blur(45px) brightness(1.5); }
+    100% { filter: blur(30px) brightness(1); }
+  }
 
-    .member {
-      background-color: rgba(30, 30, 30, 0.85);
-      padding: 20px;
-      border-radius: 15px;
-      width: 200px;
-      transition: transform 0.3s;
-      box-shadow: 0 0 10px #0f0;
-      text-align: center;
+  /* Footer chạy chữ neon */
+  .footer-marquee {
+    width: 100%;
+    overflow: hidden;
+    border-top: 2px solid #ff00ff;
+    margin-top: 15px;
+    user-select: none;
+    position: relative;
+    z-index: 20;
+  }
+  .footer-text {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 28px;
+    font-weight: 900;
+    padding: 10px 0;
+    color: #ff00ff;
+    background: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+    background-size: 400% 400%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: marquee 15s linear infinite, neonGlow 2s ease-in-out infinite alternate;
+    text-shadow:
+      0 0 8px #ff00ff,
+      0 0 15px #00ffff,
+      0 0 20px #ffff00;
+  }
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
     }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
 
-    .member:hover {
-      transform: scale(1.05);
-    }
+  /* Section title cực chất */
+  h2.section-title {
+    font-size: 36px;
+    color: #ff00ff;
+    text-align: center;
+    margin: 60px 0 40px;
+    text-shadow:
+      0 0 10px #ff00ff,
+      0 0 20px #00ffff,
+      0 0 30px #ffff00;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    user-select: none;
+  }
 
-    .member img {
-      width: 100px;
-      height: 100px;
-      border-radius: 10px;
-      margin-bottom: 15px;
-      image-rendering: pixelated;
-    }
+  /* Team grid */
+  main {
+    max-width: 1300px;
+    margin: 0 auto 80px;
+    padding: 0 20px;
+    z-index: 10;
+  }
+  .team {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+  }
 
-    .name {
-      font-size: 14px;
-      margin-bottom: 5px;
-      color: #0f0;
-    }
+  /* Card thành viên cực cháy */
+  .member {
+    background: #111;
+    border-radius: 24px;
+    border: 3px solid #ff00ff;
+    box-shadow:
+      0 0 12px #ff00ff,
+      0 0 20px #00ffff,
+      0 0 30px #ffff00;
+    padding: 28px 22px;
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: default;
+    user-select: none;
+    animation: cardPulse 4s ease-in-out infinite alternate;
+  }
+  .member:hover {
+    transform: translateY(-18px) scale(1.06);
+    box-shadow:
+      0 0 22px #ff00ff,
+      0 0 40px #00ffff,
+      0 0 60px #ffff00,
+      0 0 80px #ff00ff;
+  }
 
-    .role {
-      font-size: 11px;
-      color: #ccc;
-    }
+  /* Avatar neon & parallax hover */
+  .member img {
+    width: 120px;
+    height: 120px;
+    border-radius: 26px;
+    border: 4px solid #00ffff;
+    box-shadow:
+      0 0 12px #00ffff,
+      0 0 20px #ff00ff;
+    margin-bottom: 20px;
+    image-rendering: pixelated;
+    transition: box-shadow 0.3s ease, transform 0.6s ease;
+    will-change: transform;
+  }
+  .member:hover img {
+    box-shadow:
+      0 0 30px #00ffff,
+      0 0 40px #ff00ff,
+      0 0 50px #ffff00;
+    transform: perspective(800px) rotateX(8deg) rotateY(8deg) scale(1.1);
+  }
 
-    @media (max-width: 600px) {
-      .member {
-        width: 100%;
-      }
-    }
-  </style>
+  /* Tên & vai trò */
+  .name {
+    font-size: 22px;
+    font-weight: 900;
+    color: #00ffff;
+    text-shadow:
+      0 0 12px #00ffff,
+      0 0 20px #ff00ff;
+    margin-bottom: 8px;
+  }
+  .role {
+    font-size: 14px;
+    font-style: italic;
+    color: #ffaa00cc;
+    text-shadow:
+      0 0 8px #ffaa00aa;
+    letter-spacing: 0.05em;
+  }
+
+  /* Scrollbar VIP */
+  ::-webkit-scrollbar {
+    width: 14px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #ff00ff, #00ffff, #ffff00);
+    border-radius: 14px;
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>Team LuXuRy</h1>
 
-    <!-- Người tạo -->
-    <h2>Người tạo website</h2>
-    <div class="team">
-      <div class="member">
-        <img src="https://mc-heads.net/avatar/Notch/100" alt="Avatar">
-        <div class="name">KinooVN</div>
-        <div class="role">Người sáng lập & Web Dev</div>
-      </div>
-    </div>
+<header>
+  <h1 class="luxury-title" data-text="Team LuXuRy">Team LuXuRy</h1>
+  <div class="footer-marquee">
+    <div class="footer-text">LuXuRy 2025 trùm HeoSMP • LuXuRy 2025 trùm HeoSMP • LuXuRy 2025 trùm HeoSMP •</div>
+  </div>
+</header>
 
-    <!-- Admin team -->
-    <h2>Admin Team LuXuRy</h2>
-    <div class="team">
-      <div class="member">
-        <img src="https://mc-heads.net/avatar/Jeb_/100">
-        <div class="name">Chưa Có</div>
-        <div class="role">Admin</div>
-      </div>
-      <div class="member">
-        <img src="https://mc-heads.net/avatar/Dinnerbone/100">
-        <div class="name">Chưa Có</div>
-        <div class="role">Admin</div>
-      </div>
-      <div class="member">
-        <img src="https://mc-heads.net/avatar/Steve/100">
-        <div class="name">Chưa Có</div>
-        <div class="role">Admin</div>
-      </div>
-    </div>
-
-    <!-- Member team -->
-    <h2>Member Team LuXuRy</h2>
-    <div class="team">
-      <div class="member">
-        <img src="https://mc-heads.net/avatar/Alex/100">
-        <div class="name">KinooVN</div>
-        <div class="role">Member</div>
-      </div>
-      <div class="member">
-        <img src="https://mc-heads.net/avatar/Herobrine/100">
-        <div class="name">DucLongMC</div>
-        <div class="role">Member</div>
-      </div>
-      <div class="member">
-        <img src="https://mc-heads.net/avatar/CreeperKing/100">
-        <div class="name">DuckkLunar</div>
-        <div class="role">Member</div>
-      </div>
-      <div class="member">
-        <img src="https://mc-heads.net/avatar/FarmerJoe/100">
-        <div class="name">DuckkCuti</div>
-        <div class="role">Member</div>
-      </div>
-      <div class="member">
-        <img src="https://mc-heads.net/avatar/NekoChan/100">
-        <div class="name">ALKH6ER</div>
-        <div class="role">Member</div>
-      </div>
-      <div class="member">
-        <img src="https://mc-heads.net/avatar/Shadow/100">
-        <div class="name">TamHihihihi</div>
-        <div class="role">Member</div>
-      </div>
-      <div class="member">
-        <img src="https://mc-heads.net/avatar/FireWolf/100">
-        <div class="name">TG1986</div>
-        <div class="role">Member</div>
-      </div>
-      <div class="member">
-        <img src="https://mc-heads.net/avatar/SniperX/100">
-        <div class="name">Chưa có</div>
-        <div class="role">Member</div>
-      </div>
-      <div class="member">
-        <img src="https://mc-heads.net/avatar/CatCraft/100">
-        <div class="name">Chưa có</div>
-        <div class="role">Member</div>
-      </div>
+<main>
+  <h2 class="section-title">Người tạo website</h2>
+  <div class="team">
+    <div class="member">
+      <img src="https://mc-heads.net/avatar/Notch/120" alt="Avatar Notch" />
+      <div class="name">KinooVN</div>
+      <div class="role">Người sáng lập & Web Dev</div>
     </div>
   </div>
+
+  <h2 class="section-title">Admin Team</h2>
+  <div class="team">
+    <div class="member">
+      <img src="https://mc-heads.net/avatar/Jeb_/120" alt="Avatar Jeb_" />
+      <div class="name">Chưa biết</div>
+      <div class="role">Admin</div>
+    </div>
+    <div class="member">
+      <img src="https://mc-heads.net/avatar/Dinnerbone/120" alt="Avatar Dinnerbone" />
+      <div class="name">Chưa biết</div>
+      <div class="role">Admin</div>
+    </div>
+    <div class="member">
+      <img src="https://mc-heads.net/avatar/Steve/120" alt="Avatar Steve" />
+      <div class="name">Chưa biết</div>
+      <div class="role">Admin</div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Member Team</h2>
+  <div class="team">
+    <div class="member">
+      <img src="https://mc-heads.net/avatar/Alex/120" alt="Avatar Alex" />
+      <div class="name">KinooVN</div>
+      <div class="role">Member</div>
+    </div>
+    <div class="member">
+      <img src="https://mc-heads.net/avatar/Herobrine/120" alt="Avatar Herobrine" />
+      <div class="name">DuckLongMC</div>
+      <div class="role">Member</div>
+    </div>
+    <div class="member">
+      <img src="https://mc-heads.net/avatar/CreeperKing/120" alt="Avatar CreeperKing" />
+      <div class="name">DuckkLunar</div>
+      <div class="role">Member</div>
+    </div>
+    <div class="member">
+      <img src="https://mc-heads.net/avatar/FarmerJoe/120" alt="Avatar FarmerJoe" />
+      <div class="name">DuckkCuti</div>
+      <div class="role">Member</div>
+    </div>
+    <div class="member">
+      <img src="https://mc-heads.net/avatar/NekoChan/120" alt="Avatar NekoChan" />
+      <div class="name">ALKH6ER</div>
+      <div class="role">Member</div>
+    </div>
+    <div class="member">
+      <img src="https://mc-heads.net/avatar/Shadow/120" alt="Avatar Shadow" />
+      <div class="name">TG1986</div>
+      <div class="role">Member</div>
+    </div>
+    <div class="member">
+      <img src="https://mc-heads.net/avatar/FireWolf/120" alt="Avatar FireWolf" />
+      <div class="name">TamHihihi</div>
+      <div class="role">Member</div>
+    </div>
+    <div class="member">
+      <img src="https://mc-heads.net/avatar/SniperX/120" alt="Avatar SniperX" />
+      <div class="name">Uchihan</div>
+      <div class="role">Member</div>
+    </div>
+    <div class="member">
+      <img src="https://mc-heads.net/avatar/CatCraft/120" alt="Avatar CatCraft" />
+      <div class="name">CatCraft</div>
+      <div class="role">Member</div>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Tạo sparkle random trên nền
+  const sparkleCount = 40;
+  for (let i = 0; i < sparkleCount; i++) {
+    const sparkle = document.createElement('div');
+    sparkle.classList.add('sparkle');
+    sparkle.style.top = Math.random() * 100 + 'vh';
+    sparkle.style.left = Math.random() * 100 + 'vw';
+    sparkle.style.animationDelay = (Math.random() * 6) + 's';
+    sparkle.style.width = sparkle.style.height = (3 + Math.random() * 6) + 'px';
+    document.body.appendChild(sparkle);
+  }
+</script>
+
 </body>
 </html>
